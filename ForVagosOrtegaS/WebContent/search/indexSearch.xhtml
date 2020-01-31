@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/saoTemplate.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<p:panel id="busqueda" header="Busca tus vacaciones deseadas..."
+				style="margin-bottom:20px;width: 50%;display: flex;flex-direction: column;">
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="cboProvincias" value="Provincia:" />
+					<p:selectOneMenu id="cboProvincias"
+						value="#{hotelSearchBean.idProvincia}">
+						<f:selectItem itemLabel="Selecciona una Provincia..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{hotelSearchBean.listadoProvincia}"
+							var="provincia" itemLabel="#{provincia.nombre}"
+							itemValue="#{provincia.id_provincia}" />
+						<p:ajax listener="#{hotelSearchBean.onCboProvinciasChange()}"
+							update="cboMunicipios" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="cboMunicipios" value="Municipio:" />
+					<p:selectOneMenu id="cboMunicipios"
+						value="#{hotelSearchBean.idMunicipio}">
+						<f:selectItem itemLabel="Selecciona un Municipio..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{hotelSearchBean.onCboProvinciasChange()}"
+							var="municipio" itemLabel="#{municipio.nombre}"
+							itemValue="#{municipio.id_municipio}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="cboFechaIni" value="Fecha salida:" />
+					<p:datePicker id="cboFechaIni" showIcon="true"
+						value="#{hotelSearchBean.minDate}"
+						mindate="#{hotelSearchBean.minDate}"
+						maxdate="#{hotelSearchBean.maxDate}" readonlyInput="true" />
+
+					<p:outputLabel for="cboFechaFin" value="Fecha regreso:" />
+					<p:datePicker id="cboFechaFin" showIcon="true"
+						value="#{hotelSearchBean.maxDate}"
+						mindate="#{hotelSearchBean.minDate}"
+						maxdate="#{hotelSearchBean.maxDate}" readonlyInput="true" />
+
+					<p:commandButton value="Enviar" id="Submit"
+						action="#{resultsSearchBean}"
+						style="margin-right:20px;" ajax="false" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

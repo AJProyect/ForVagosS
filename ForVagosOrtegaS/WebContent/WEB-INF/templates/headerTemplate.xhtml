@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<body>
+	<ui:composition>
+
+		<!-- <h:outputText id="lblTotal" value="#{shoppingCartBean.totalAsString}" /> -->
+		<div id="header"
+			style="position: relative; background-color: #00BD9D; color: #FFFBFA; display: flex; justify-content: space-between;">
+			<div id="carrito">
+				<h:link outcome="/customer/mycarrito.xhtml">
+					<h:graphicImage library="images" height="30"
+						name="empty-cart-dark_small.png" />
+				</h:link>
+			</div>
+			<div id="main-header">
+				<h1>Vacances with SAO (provisional)</h1>
+			</div>
+			<div id="botones">
+				<h:button outcome="customer/newCustomer.xhtml" value="Regístrate" />
+				<h:button outcome="/login.xhtml" value="Identifícate" />
+			</div>
+
+
+		</div>
+	</ui:composition>
+</body>
+
+</html>
